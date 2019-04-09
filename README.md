@@ -1,13 +1,3 @@
-# hub.docker.com/r/tiredofit/nginx-php-fpm
-
-[![Build Status](https://img.shields.io/docker/build/tiredofit/nginx-php-fpm.svg)](https://hub.docker.com/r/tiredofit/nginx-php-fpm)
-[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/nginx-php-fpm.svg)](https://hub.docker.com/r/tiredofit/nginx-php-fpm)
-[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/nginx-php-fpm.svg)](https://hub.docker.com/r/tiredofit/nginx-php-fpm)
-[![Docker 
-Layers](https://images.microbadger.com/badges/image/tiredofit/nginx-php-fpm.svg)](https://microbadger.com/images/tiredofit/nginx-php-fpm)
-
-
-
 # Introduction
 
 Dockerfile to build a [Nginx](https://www.nginx.org) w/[PHP-FPM](https://php.net) container image.
@@ -18,10 +8,7 @@ Dockerfile to build a [Nginx](https://www.nginx.org) w/[PHP-FPM](https://php.net
 * All available PHP Extensions included
 * Enabled by default extensions are: apcu, bcmath, ctype, curl, dom, gd, iconv, intl, json, ldap, mbstring, mcrypt, opcache, openssl, pdo, pdo_mysql, pdo_sqlite, pgsql, phar, redis, session, xml, xmlreader, zlib
 
-
-[Changelog](CHANGELOG.md)
-
-# Authors
+# Original Authors
 
 - [Dave Conroy](http://github/tiredofit/)
 
