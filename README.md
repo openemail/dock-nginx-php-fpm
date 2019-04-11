@@ -1,16 +1,25 @@
 # Introduction
 
-Dockerfile to build a [Nginx](https://www.nginx.org) w/[PHP-FPM](https://php.net) container image.
+Dockerfile to build a w/[PHP-FPM](https://php.net) container image.
 
-* This Container uses a [customized Alpine Linux base](https://hub.docker.com/r/tiredofit/alpine) which includes [s6 overlay](https://github.com/just-containers/s6-overlay) enabled for PID 1 Init capabilities, [zabbix-agent](https://zabbix.org) based on 3.4 Packages for individual container monitoring, Cron also installed along with other tools (bash,curl, less, logrotate, mariadb-client, nano, vim) for easier management. It also supports sending to external SMTP servers..
+* This Container uses a [customized Alpine Linux base](https://hub.docker.com/r/openemail/alpine) which includes [s6 overlay](https://github.com/just-containers/s6-overlay) enabled for PID 1 Init capabilities, [zabbix-agent](https://zabbix.org) based on 3.4 Packages for individual container monitoring, Cron also installed along with other tools (bash,curl, less, logrotate, mariadb-client, nano, vim) for easier management. It also supports sending to external SMTP servers..
 * Debug Mode to Enable XDebug
-* Caching is provided with w/ APC, OpCache
+* Caching is provided with w/ APC, OpCache, memcache
 * All available PHP Extensions included
-* Enabled by default extensions are: apcu, bcmath, ctype, curl, dom, gd, iconv, intl, json, ldap, mbstring, mcrypt, opcache, openssl, pdo, pdo_mysql, pdo_sqlite, pgsql, phar, redis, session, xml, xmlreader, zlib
+* Enabled by default extensions are: apcu, bcmath, ctype, curl, dom, gd, iconv, intl, json, ldap, mbstring, mcrypt, opcache, openssl, pdo, pdo_mysql, pdo_sqlite, pgsql, phar, redis, session, xml, xmlreader, zlib, memcache, mailparse
 
 # Original Authors
 
 - [Dave Conroy](http://github/tiredofit/)
+
+# Authors
+
+- [Chinthaka Deshapriya](https://www.linkedin.com/in/chinthakadeshapriya/)
+
+# Contributors
+
+- [Amila Kothalawala](https://www.linkedin.com/in/amila-m-kothalawala-87357152/)
+
 
 # Table of Contents
 
@@ -36,16 +45,16 @@ This image assumes that you are using a reverse proxy such as [jwilder/nginx-pro
 
 # Installation
 
-Automated builds of the image are available on [Registry](https://hub.docker.com/tiredofit/nginx-php-fpm) and is the recommended method of installation.
+Automated builds of the image are available on [Registry](https://hub.docker.com/openemail/php-fpm) and is the recommended method of installation.
 
 
 ```bash
-docker pull hub.docker.com/tiredofit/nginx-php-fpm:(imagetag)
+docker pull hub.docker.com/openemail/php-fpm:(imagetag)
 ```
 
 The following image tags are available:
 
-* `7.2-latest` - PHP 7.2.x w/Alpine 3.8
+* `7.3-latest` - PHP 7.3.x w/Alpine 3.9
 
 # Quick Start
 
@@ -57,8 +66,6 @@ The following image tags are available:
 # Configuration
 
 ### Data-Volumes
-
-The container starts up and reads from `/etc/nginx/nginx.conf` for some basic configuration and to listen on port 73 internally for Nginx Status responses. `/etc/nginx/conf.d` contains a sample configuration file that can be used to customize a nginx server block. 
 
 The following directories are used for configuration and can be mapped for persistent storage.
 
@@ -113,10 +120,10 @@ Enabling / Disabling Specific Extensions
 | `PHP_ENABLE_INTL` | INTL extension - Default `TRUE` |
 | `PHP_ENABLE_JSON` | JSON extension - Default `TRUE` |
 | `PHP_ENABLE_LDAP` | LDAP extension - Default `TRUE` |
-| `PHP_ENABLE_MAILPARSE` | MAILPARSE extension - Default `FALSE` |
+| `PHP_ENABLE_MAILPARSE` | MAILPARSE extension - Default `TRUE` |
 | `PHP_ENABLE_MBSTRING` | mbstring extension - Default `TRUE` |
 | `PHP_ENABLE_MCRYPT` | mcrypt extension - Default `TRUE` |
-| `PHP_ENABLE_MEMCACHED` | MemCached extension - Default `FALSE` |
+| `PHP_ENABLE_MEMCACHED` | MemCached extension - Default `TRUE` |
 | `PHP_ENABLE_MYSQLND` | MySQLND extension - Default `TRUE` |
 | `PHP_ENABLE_ODBC` |  ODBC extension - Default `FALSE` |
 | `PHP_ENABLE_OPCACHE` | OPCACHE extension - Default `TRUE` |
@@ -168,7 +175,7 @@ The following ports are exposed.
 
 | Port      | Description |
 |-----------|-------------|
-| `80` 	   	| HTTP 		    |
+| `9000` 	   	| HTTP 		    |
 
 # Maintenance
 #### Shell Access
@@ -178,12 +185,11 @@ If you wish to turn the web server into maintenance mode showing a single page s
 For debugging and maintenance purposes you may want access the containers shell. 
 
 ```bash
-docker exec -it (whatever your container name is e.g. nginx-php-fpm) bash
+docker exec -it (whatever your container name is e.g. php-fpm) bash
 ```
 
 # References
 
-* https://www.nginx.org
 * http://www.php.org
 * https://xdebug.org
 
